@@ -6,7 +6,7 @@ defmodule PrimeTest do
   end
 
   test "nth_prime with 4" do
-    assert Prime.nth_prime(100) == 541
+    assert Prime.nth_prime(100) == 523
   end
 
   test "is_prime" do
