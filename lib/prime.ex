@@ -1,29 +1,31 @@
 defmodule Prime do
 
-  def nth_prime(1) do
-    2
+  def upto(list, x) do
+    list |> Stream.take_while &(&1 <= x)
   end
 
-  def nth_prime(n) do
-    nth_prime_helper([2], 3, n)
+  def naturals, do: Stream.iterate(1, &(&1+1))
+
+  def from(list, x) do
+    list |> Stream.drop_while &(&1 < x)
   end
 
-  def nth_prime_helper(primes, current, n) do
-    cond do
-      length(primes) == n ->
-        hd primes
-      is_rel_prime(current, primes) ->
-        nth_prime_helper([ current | primes ], current + 2, n)
-      true ->
-        nth_prime_helper(primes, current + 2, n)
-    end
+  def does_not_divide(divisors, x) do
+    divisors |> Stream.map(&(rem(x, &1) != 0)) |> Enum.all?
   end
 
-  def is_rel_prime(_, []) do
-    true
+  def primes do
+    Stream.transform(naturals |> from(2), [],
+      fn current, primes_so_far ->
+        if(primes_so_far |> upto(:math.sqrt(current)) |> does_not_divide(current)) do
+          {[current], primes_so_far ++ [current]}
+        else
+          {[], primes_so_far}
+        end
+    end)
   end
 
-  def is_rel_prime(test, [ x | xs ]) do
-    rem(test, x) != 0 && is_rel_prime(test, xs)
+  def nth_prime(number) do
+    primes |> Enum.take(number) |> List.last
   end
 end
