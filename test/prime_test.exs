@@ -1,12 +1,12 @@
 defmodule PrimeTest do
   use ExUnit.Case
-  
+
   test "nth_prime empty" do
-      assert Prime.nth_prime(1) == 1
+      assert Prime.nth_prime(1) == 2
   end
 
   test "nth_prime with 4" do
-    assert Prime.nth_prime(100) == 523
+    assert Prime.nth_prime(100) == 541
   end
 
   test "is_prime" do

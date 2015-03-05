@@ -1,7 +1,7 @@
 defmodule Prime do
 
   def nth_prime(number) do
-    Stream.iterate(1, &(next_prime(&1+1)))
+    Stream.iterate(2, &(next_prime(&1+1)))
       |> Enum.take(number)
       |> List.last
   end
@@ -24,23 +24,23 @@ defmodule Prime do
   end
 
   def is_prime([first_num | other_nums]) do
-      IO.puts("Got a list starting with #{first_num} and ending wth #{other_nums}")
+      # IO.puts("Got a list starting with #{first_num} and ending wth #{other_nums}")
       false
   end
 
   def is_prime([]) do
-    IO.puts("Got a list and it's empty.")
+    # IO.puts("Got a list and it's empty.")
     true
   end
 
   def is_prime(number) do
-      IO.puts("Got the number #{number}.")
-      case number do
-        1 -> true
-        2 -> true
-        3 -> true
-        other -> not Enum.any?( Enum.map( Enum.to_list(2..round(:math.sqrt(other))), fn x -> rem(other, x) == 0 end ))
-        #other -> mod_iterator(other, 2)
+    # IO.puts("Got the number #{number}.")
+    case number do
+      1 -> false
+      2 -> true
+      3 -> true
+      other -> not Enum.any?( Enum.map( Enum.to_list(2..round(:math.sqrt(other))), fn x -> rem(other, x) == 0 end ))
+      #other -> mod_iterator(other, 2)
     end
   end
 
