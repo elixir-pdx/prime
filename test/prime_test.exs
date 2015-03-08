@@ -12,5 +12,4 @@ defmodule PrimeTest do
   test "nth_prime with 1000" do
     assert Prime.nth_prime(1000) == 7919
   end
-
 end
